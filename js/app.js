@@ -2,14 +2,11 @@
  * Create a list that holds all of your cards
  test
  */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+const icons = [
+              "fa-diamond", "fa-paper-plane", "fa-anchor",
+              "fa-bolt", "fa-cube", "fa-bicycle",
+              "fa-bomb", "fa-leaf"
+              ];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -23,8 +20,33 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
 
-    return array;
+    return icons;
 }
+
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
+const deck = document.getElementById('mainDeck');
+
+/*
+ *Generate Deck
+*/
+
+shuffle(icons);
+function genDeck(){
+  for (let i = 0; i < icons.length; i++){
+    var card = document.createElement('li');
+    card.className = "card";
+    card.id = "card" + i;
+    deck.appendChild(card);
+    card.innerHTML = '<i class="fa ' + icons[i] + '"></i>' ;
+    console.log(card.innerHTML);
+  }
+}
+
 
 
 /*
