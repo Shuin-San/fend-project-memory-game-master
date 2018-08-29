@@ -5,12 +5,17 @@
 let icons = [
               "fa-diamond", "fa-paper-plane", "fa-anchor",
               "fa-bolt", "fa-cube", "fa-bicycle",
+              "fa-bomb", "fa-leaf", "fa-diamond",
+              "fa-paper-plane", "fa-anchor",
+              "fa-bolt", "fa-cube", "fa-bicycle",
               "fa-bomb", "fa-leaf"
               ];
 
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -22,6 +27,8 @@ function shuffle(array) {
 
     return icons;
 }
+
+shuffle(icons);
 
 /*
  * Display the cards on the page
@@ -35,30 +42,18 @@ const deck = document.getElementById('mainDeck');
  *Generate Deck
 */
 
-shuffle(icons);
 function genDeck(){
   for (let i = 0; i < icons.length; i++){
-    var card = document.createElement('li');
+    let card = document.createElement('li');
     card.className = "card open show";
-    card.id = "card" + i;
+    card.id = "card_" + icons[i];
     deck.appendChild(card);
-    card.innerHTML = '<i class="fa ' + icons[i] + '"></i>' ;
-    console.log(card.innerHTML);
-    if (i == icons.length-1) {
-      for (let y = 0; y < icons.length; y++){
-        shuffle(icons);
-        var card = document.createElement('li');
-        i++
-        card.className = "card open show";
-        card.id = "card" + i;
-        deck.appendChild(card);
-        card.innerHTML = '<i class="fa ' + icons[y] + '"></i>' ;
-        console.log(card.innerHTML);
-        console.log(i);
-      }
-    }
+    card.innerHTML = '<i class="fa ' + icons[i] + '">'+ i +'</i>' ;
+    console.log(i);
   }
+
 }
+
 
 genDeck();
 
