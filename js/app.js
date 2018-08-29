@@ -45,12 +45,15 @@ const deck = document.getElementById('mainDeck');
 function genDeck(){
   for (let i = 0; i < icons.length; i++){
     let card = document.createElement('li');
-    card.className = "card open show";
+    card.className = "card";
     card.id = "card_" + icons[i];
     deck.appendChild(card);
     card.innerHTML = '<i class="fa ' + icons[i] + '">'+ i +'</i>' ;
+    this.addEventListener("click", this.turnCard, false);
     console.log(i);
   }
+  allCards = document.getElementsByClassName('card');
+
 
 }
 
@@ -67,3 +70,8 @@ genDeck();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+function turnCard(id){
+  console.log(id);
+}
