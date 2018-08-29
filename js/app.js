@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  test
  */
-const icons = [
+let icons = [
               "fa-diamond", "fa-paper-plane", "fa-anchor",
               "fa-bolt", "fa-cube", "fa-bicycle",
               "fa-bomb", "fa-leaf"
@@ -39,15 +39,28 @@ shuffle(icons);
 function genDeck(){
   for (let i = 0; i < icons.length; i++){
     var card = document.createElement('li');
-    card.className = "card";
+    card.className = "card open show";
     card.id = "card" + i;
     deck.appendChild(card);
     card.innerHTML = '<i class="fa ' + icons[i] + '"></i>' ;
     console.log(card.innerHTML);
+    if (i == icons.length-1) {
+      for (let y = 0; y < icons.length; y++){
+        shuffle(icons);
+        var card = document.createElement('li');
+        i++
+        card.className = "card open show";
+        card.id = "card" + i;
+        deck.appendChild(card);
+        card.innerHTML = '<i class="fa ' + icons[y] + '"></i>' ;
+        console.log(card.innerHTML);
+        console.log(i);
+      }
+    }
   }
 }
 
-
+genDeck();
 
 /*
  * set up the event listener for a card. If a card is clicked:
