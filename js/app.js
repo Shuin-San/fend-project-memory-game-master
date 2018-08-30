@@ -47,7 +47,7 @@ function genDeck(){
     card.className = "card";
     card.id = "card_" + i;
     deck.appendChild(card);
-    card.innerHTML = '<i class="fa ' + icons[i] + '">'+ i +'</i>' ;
+    card.innerHTML = '<i class="fa ' + icons[i] + '"></i>' ;
     card.addEventListener("click", this.showCard, false);
     console.log(i);
   }
@@ -71,20 +71,22 @@ genDeck();
  */
 
  let openCards = [];
+ let lockedCards = [];
+
 
 //shows the clicked cards and contains logic for comparing the two and acting accordingly
 
 function showCard(id){
-  let clickedCard = event.target.id;
-  let cardType = document.getElementById(clickedCard).children;
-  document.getElementById(clickedCard).className = "card open show";
+  clickedCard = event.target.id;
+  cardType = document.getElementById(clickedCard).children;
+  document.getElementById(clickedCard).className = "card open show unlocked";
 
   //Control if list has items. if true , execute controlMatch()
-  if (openCards.length = 2) {
-    addToOpenList(cardType[0].classList[1]);
-    controlMatch(cardType[0].classList[1]);
-    } else {
-    addToOpenList(cardType[0].classList[1]);
+  if (openCards.length == 1) {
+      controlMatch(cardType[0].classList[1]);
+  } else {
+      addToOpenList(cardType[0].classList[1]);
+
   }
 
 }
@@ -101,6 +103,27 @@ function addToOpenList(cardID){
 
 function controlMatch(theCard){
   result = openCards.includes(theCard);
+  if (result == true){
+    lockCards(openCards);
+    openCards = [];
+  } else {
+    hideCards();
+  }
   console.log(result);
+}
 
+function lockCards(list){
+
+  console.log("Locking "+ openCards);
+  lockedCards.push(openCards);
+
+}
+
+function hideCards(){
+  turned = document.querySelectorAll("li.unlocked");
+  for (i = 0; i < turned.length; i++){
+    turned[i].className = "card";
+  }
+  console.log("No Match! Hiding both cards!");
+  openCards.length = 0;
 }
