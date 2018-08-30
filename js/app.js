@@ -12,7 +12,6 @@ let icons = [
               ];
 
 
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -46,10 +45,10 @@ function genDeck(){
   for (let i = 0; i < icons.length; i++){
     let card = document.createElement('li');
     card.className = "card";
-    card.id = "card_" + icons[i];
+    card.id = "card_" + i;
     deck.appendChild(card);
     card.innerHTML = '<i class="fa ' + icons[i] + '">'+ i +'</i>' ;
-    this.addEventListener("click", this.turnCard, false);
+    card.addEventListener("click", this.showCard, false);
     console.log(i);
   }
   allCards = document.getElementsByClassName('card');
@@ -71,7 +70,37 @@ genDeck();
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+ let openCards = [];
 
-function turnCard(id){
-  console.log(id);
+//shows the clicked cards and contains logic for comparing the two and acting accordingly
+
+function showCard(id){
+  let clickedCard = event.target.id;
+  let cardType = document.getElementById(clickedCard).children;
+  document.getElementById(clickedCard).className = "card open show";
+
+  //Control if list has items. if true , execute controlMatch()
+  if (openCards.length = 2) {
+    addToOpenList(cardType[0].classList[1]);
+    controlMatch(cardType[0].classList[1]);
+    } else {
+    addToOpenList(cardType[0].classList[1]);
+  }
+
+}
+
+// Adds clicked card to list of "open" cards
+
+function addToOpenList(cardID){
+  openCards.push(cardID);
+  console.log("added to open card list :" + openCards);
+
+}
+
+// Controls for duplicates in open card list.
+
+function controlMatch(theCard){
+  result = openCards.includes(theCard);
+  console.log(result);
+
 }
