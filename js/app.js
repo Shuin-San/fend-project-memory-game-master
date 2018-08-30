@@ -73,6 +73,8 @@ genDeck();
  let openCards = [];
  let lockedCards = [];
  let moves = 0;
+ let pairs = 0;
+ let score = 1500;
 
 
 //shows the clicked cards and contains logic for comparing the two and acting accordingly
@@ -107,9 +109,10 @@ function controlMatch(theCard){
   result = openCards.includes(theCard);
   if (result == true){
     lockCards(openCards);
+    pairs += 1;
     openCards = [];
   } else {
-    setTimeout(hideCards, 1000);
+    setTimeout(hideCards, 500);
   }
   console.log(result);
 }
@@ -137,4 +140,6 @@ function hideCards(){
 function countMove(){
   moves++;
   document.getElementById("moveCounter").innerHTML = moves;
+  document.getElementById("pairCounter").innerHTML = pairs;
+  score -= 100;
 }
