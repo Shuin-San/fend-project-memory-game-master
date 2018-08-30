@@ -72,6 +72,7 @@ genDeck();
 
  let openCards = [];
  let lockedCards = [];
+ let moves = 0;
 
 
 //shows the clicked cards and contains logic for comparing the two and acting accordingly
@@ -79,11 +80,12 @@ genDeck();
 function showCard(id){
   clickedCard = event.target.id;
   cardType = document.getElementById(clickedCard).children;
-  document.getElementById(clickedCard).className = "card open show unlocked";
+  document.getElementById(clickedCard).className = "card open show cardTurned";
 
   //Control if list has items. if true , execute controlMatch()
   if (openCards.length == 1) {
       controlMatch(cardType[0].classList[1]);
+      countMove();
   } else {
       addToOpenList(cardType[0].classList[1]);
 
@@ -107,7 +109,7 @@ function controlMatch(theCard){
     lockCards(openCards);
     openCards = [];
   } else {
-    hideCards();
+    setTimeout(hideCards, 1000);
   }
   console.log(result);
 }
@@ -116,14 +118,23 @@ function lockCards(list){
 
   console.log("Locking "+ openCards);
   lockedCards.push(openCards);
+  turned = document.querySelectorAll("li.cardTurned");
+  for (i = 0; i < turned.length; i++){
+    turned[i].className = "card open show matched"
+  }
 
 }
 
 function hideCards(){
-  turned = document.querySelectorAll("li.unlocked");
+  turned = document.querySelectorAll("li.cardTurned");
   for (i = 0; i < turned.length; i++){
     turned[i].className = "card";
   }
   console.log("No Match! Hiding both cards!");
   openCards.length = 0;
+}
+
+function countMove(){
+  moves++;
+  document.getElementById("moveCounter").innerHTML = moves;
 }
