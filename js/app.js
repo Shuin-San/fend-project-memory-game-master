@@ -1,6 +1,5 @@
 /*
  * Create a list that holds all of your cards
- test
  */
 let icons = [
     "fa-diamond", "fa-paper-plane", "fa-anchor",
@@ -59,7 +58,6 @@ function genDeck() {
 }
 
 
-genDeck();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -138,7 +136,7 @@ function lockCards(list) {
     lockedCards.push(openCards);
     turned = document.querySelectorAll("li.cardTurned");
     for (i = 0; i < turned.length; i++) {
-        turned[i].className = "card open show matched"
+        turned[i].className = "card open show match"
     }
 
 }
@@ -150,7 +148,7 @@ function hideCards() {
     }
     console.log("No Match! Hiding both cards!");
     openCards.length = 0;
-    score -= 100;
+    score -= 75;
 }
 
 function countMove() {
@@ -189,4 +187,12 @@ function playMusic(status) {
     } else if (status === "stop") {
         document.getElementById("bgm").pause();
     }
+}
+
+function startGame(){
+
+  let theButton = document.getElementById("startButton");
+  theButton.parentNode.removeChild(theButton);
+  genDeck();
+  startTimer();
 }
