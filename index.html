@@ -12,7 +12,7 @@
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
+<body onLoad=showModal();>
 
     <div class="container">
         <header>
@@ -38,14 +38,35 @@
           </div>
           <div class="row">
             <div class="col-6">
-              <button type="button" class="btn btn-outline-dark" id="pauseButton" onclick=pauseGame();><i class="fa fa-pause"></i> Pause Game</button>
-            </div>
-            <div class="col-4">
               <button type="button" class="btn btn-outline-dark" id="pauseButton" onClick=resetGame()><i class="fa fa-repeat"></i> Restart Game</button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-outline-dark" id="pauseButton"><i class="fa fa-time"></i> <span id="seconds-counter">0</span> Seconds</button>
             </div>
           </div>
         </section>
           <ul class="deck" id="mainDeck"><button type="button" class="btn btn-outline-light" id="startButton" onclick=startGame();>Start Game</button></ul>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="startLabel" tabindex="-1" role="dialog" aria-labelledby="startLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Udacity Memory Game Project <br>By Zalimidis Vasileios</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Welcome,
+          this game was created as part of Udacity's Front End Developer nanodegree curriculum.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick=startGame();>Start Game</button>
+        </div>
+      </div>
     </div>
   </div>
 

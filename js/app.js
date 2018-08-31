@@ -12,6 +12,15 @@ let icons = [
 
 let totalPairs = icons.length / 2;
 
+//Launch welcoming Modal
+function showModal(){
+$('#startLabel').modal({
+  escapeClose: false,
+  clickClose: false,
+  showClose: false
+});
+}
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -80,6 +89,8 @@ let pairs = 0;
 let score = 1500;
 let stars = 3;
 let bgm = document.getElementById("bgm");
+let time = 0;
+let theTimer;
 
 
 //shows the clicked cards and contains logic for comparing the two and acting accordingly
@@ -124,6 +135,7 @@ function controlMatch(theCard) {
         lockCards(openCards);
         pairs += 1;
         openCards = [];
+        checkWin();
     } else {
         setTimeout(hideCards, 500);
     }
@@ -187,6 +199,23 @@ function playMusic(status) {
     } else if (status === "stop") {
         document.getElementById("bgm").pause();
     }
+}
+
+function startTimer(){
+  var theTimer = setInterval(function(){
+    time++;
+    document.getElementById("seconds-counter").innerHTML = time;
+    },1000);
+}
+
+function stopTimer(){
+  clearInterval(theTimer);
+}
+
+function checkWin(){
+  if (pairs === totalPairs) {
+    document.getElementById("mainDeck").innerHTML = "<div class='alert alert-light col' role='alert'>Congrats! You won the game! <br> Score : "+ score +"</h1> <br>Your time was : "+ time +" seconds.";
+  }
 }
 
 function startGame(){
