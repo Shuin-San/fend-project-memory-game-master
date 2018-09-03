@@ -10,6 +10,7 @@ let icons = [
     "fa-bomb", "fa-leaf"
 ];
 
+//calculate total pairs based on icons list
 let totalPairs = icons.length / 2;
 
 //Launch welcoming Modal
@@ -49,7 +50,7 @@ shuffle(icons);
 const deck = document.getElementById('mainDeck');
 
 /*
- *Generate Deck
+ *Generate Deck HTML
  */
 
 function genDeck() {
@@ -79,6 +80,7 @@ function genDeck() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+// first lets set all the variables needed for the logic
 let openCards = [];
 let lockedCards = [];
 let firstCard = "";
@@ -142,6 +144,7 @@ function controlMatch(theCard) {
     console.log(result);
 }
 
+// If the cards are matching , lock them open !
 function lockCards(list) {
 
     console.log("Locking " + openCards);
@@ -153,6 +156,8 @@ function lockCards(list) {
 
 }
 
+// if the cards dont match , hide them again
+
 function hideCards() {
     turned = document.querySelectorAll("li.cardTurned");
     for (i = 0; i < turned.length; i++) {
@@ -163,6 +168,7 @@ function hideCards() {
     score -= 75;
 }
 
+// count the moves
 function countMove() {
     moves++;
     document.getElementById("moveCounter").innerHTML = moves;
@@ -170,10 +176,12 @@ function countMove() {
     updateRating();
 }
 
+// lazy reload solution :)
 function resetGame() {
     window.location.reload();
 }
 
+// calculate stars depending on score.
 function updateRating() {
     if (score >= 1000) {
         stars = 3;
@@ -185,6 +193,7 @@ function updateRating() {
     genStars(stars);
 }
 
+// generate stars html
 function genStars(numstar) {
     rating = "";
     for (i = 0; i < numstar; i++) {
@@ -193,6 +202,7 @@ function genStars(numstar) {
     document.getElementById("starRating").innerHTML = rating;
 }
 
+// start/stop background music
 function playMusic(status) {
     if (status === "start") {
         document.getElementById("bgm").play();
@@ -201,6 +211,7 @@ function playMusic(status) {
     }
 }
 
+// start timer function. shows seconds into the game
 function startTimer(){
   var theTimer = setInterval(function(){
     time++;
@@ -208,16 +219,20 @@ function startTimer(){
     },1000);
 }
 
+// stops the timer !
 function stopTimer(){
   clearInterval(theTimer);
 }
 
+// checks if all conditions to win are met !
 function checkWin(){
   if (pairs === totalPairs) {
     document.getElementById("mainDeck").innerHTML = "<div class='alert alert-light col' role='alert'>Congrats! You won the game! <br> Score : "+ score +"</h1> <br>Your time was : "+ time +" seconds.";
+    stopTimer()
   }
 }
 
+// starts the game when player clicks on start
 function startGame(){
 
   let theButton = document.getElementById("startButton");
