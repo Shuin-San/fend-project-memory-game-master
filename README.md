@@ -16,3 +16,10 @@
  - Background music
  - Clicking sound effects
  - CSS animations
+
+
+## Dependencies :
+ - Animate.css by https://daneden.me/
+ - Bootstrap 4
+ - jQuery
+ - FontAwesome 

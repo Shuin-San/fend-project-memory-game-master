@@ -57,7 +57,7 @@ function genDeck() {
     document.getElementById("totalPairs").innerHTML = totalPairs;
     for (let i = 0; i < icons.length; i++) {
         let card = document.createElement('li');
-        card.className = "card";
+        card.className = "card animated fadeIn  delay-0.1s";
         card.id = "card_" + i;
         deck.appendChild(card);
         card.innerHTML = '<i class="fa ' + icons[i] + '"></i>';
@@ -102,7 +102,7 @@ function showCard(id) {
     audio.play();
     clickedCard = event.target.id;
     cardType = document.getElementById(clickedCard).children;
-    document.getElementById(clickedCard).className = "card open show cardTurned";
+    document.getElementById(clickedCard).className = "card open show cardTurned animated faster rubberBand delay-2s";
     //Control if list has items. if true , execute controlMatch()
     if (openCards.length == 1 && firstCard != clickedCard) {
         controlMatch(cardType[0].classList[1]);
@@ -139,7 +139,7 @@ function controlMatch(theCard) {
         openCards = [];
         checkWin();
     } else {
-        setTimeout(hideCards, 500);
+        setTimeout(hideCards, 750);
     }
     console.log(result);
 }
@@ -151,7 +151,7 @@ function lockCards(list) {
     lockedCards.push(openCards);
     turned = document.querySelectorAll("li.cardTurned");
     for (i = 0; i < turned.length; i++) {
-        turned[i].className = "card open show match"
+        turned[i].className = "card open show match animated infinite pulse delay-2s"
     }
 
 }
